@@ -1,0 +1,20 @@
+# encoding: utf-8
+require File.expand_path('../lib/attempt_to/version', __FILE__)
+
+Gem::Specification.new do |gem|
+  gem.name    = 'attempt_to'
+  gem.version = AttemptTo::VERSION
+  gem.date    = Date.today.to_s
+
+  gem.summary = "AttemptTo is a small utility for attempting a code block multiple times"
+  gem.description = "AttemptTo calls a code block and re-tries it if it throws an exception. Otherwise exits"
+
+  gem.authors  = ['Bas Vodde']
+  gem.email    = 'basv@odd-e.com'
+  gem.homepage = 'https://github.com/basvodde/attempt_to'
+
+  gem.add_dependency('rake')
+  gem.add_development_dependency('rspec', [">= 2.0.0"])
+
+  gem.files = `git ls-files -- {.,test,spec,lib}/*`.split("\n")
+end
