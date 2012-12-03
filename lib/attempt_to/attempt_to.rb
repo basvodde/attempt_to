@@ -6,9 +6,9 @@ module AttemptTo
       begin
         return yield
       rescue Exception => ex
-        Kernel.puts "Failed attempt ##{times+1} #{something}. Error message: #{ex.message}"
+        Kernel.puts "Failed attempt ##{times+1} to #{something}. Error message: #{ex.message}"
         if times+1 == amount
-          Kernel.puts "Attempted #{amount} times #{something}. Giving up..."
+          Kernel.puts "Attempted #{amount} times to #{something}. Giving up..."
           exit
         end
       end

@@ -16,14 +16,14 @@ describe "Attempt to do something a couple of times, if it fails, bail out." do
   end
 
   it "returns whatever the code block returns" do
-    attempt_to("to do this", 2) {
+    attempt_to("do this", 2) {
       "returns"
     }.should == "returns"
   end
   
   it "calls the block multiple times when it fails " do
     Kernel.should_receive(:puts).with("Failed attempt #1 to do something. Error message: wrong 1")
-    attempt_to("to do something", 3) {
+    attempt_to("do something", 3) {
       @attempts += 1
       raise(Exception, "wrong #{@attempts}") if @attempts == 1
     }
@@ -34,7 +34,7 @@ describe "Attempt to do something a couple of times, if it fails, bail out." do
     Kernel.should_receive(:puts).exactly(3).times
     Kernel.should_receive(:puts).with("Attempted 3 times to do this. Giving up...")
     lambda {
-      attempt_to("to do this", 3) {
+      attempt_to("do this", 3) {
         @attempts += 1
         raise(Exception, "wrong!")
       }
