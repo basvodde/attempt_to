@@ -14,8 +14,24 @@ module AttemptTo
       end
     }
   end
+
+  def self.attempt_to_with_timeout(seconds)
+    Timeout::timeout(seconds) {
+      success = false
+      while not success
+        begin
+          success = yield
+        rescue Exception
+        end
+      end
+    }
+  end
 end
 
 def attempt_to(something, amount, &code_block)
   AttemptTo.attempt_to(something, amount, &code_block)
+end
+
+def attempt_to_with_timeout(seconds, &code_block)
+  AttemptTo.attempt_to_with_timeout(seconds, &code_block)
 end
