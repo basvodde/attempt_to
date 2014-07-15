@@ -21,7 +21,8 @@ module AttemptTo
       while not success
         begin
           success = yield
-        rescue Exception
+        rescue Exception => e
+          raise e if e.message == 'execution expired' # Bug in Ruby 2.0. The rescue rescues a timeout object of a weird class type
         end
       end
     }

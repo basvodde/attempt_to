@@ -1,6 +1,7 @@
 
 require 'attempt_to'
 require 'socket'
+require 'timeout'
 
 describe "Attempt to do something a couple of times, if it fails, bail out." do
 
@@ -63,4 +64,7 @@ describe "Attempt to do something a couple of times, if it fails, bail out." do
     expect { attempt_to_with_timeout(0.3) { false } }.to raise_error(Timeout::Error, "execution expired")
   end
 
+  it "will return a Timeout when the condition never happens as it takes too long" do
+    expect { attempt_to_with_timeout(0.3) { sleep(2) } }.to raise_error(Timeout::Error, "execution expired")
+  end
 end
